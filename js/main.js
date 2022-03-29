@@ -1,4 +1,4 @@
-function randomNumder(min, max) {
+function createRandomNumder(min, max) {
   if (max <= min || min < 0) {
     return console.log('Не верный диапазон значений');
   }
@@ -7,15 +7,15 @@ function randomNumder(min, max) {
   return Math.floor(number);
 }
 
-console.log(randomNumder(6, 58));
+console.log(createRandomNumder(6, 58));
 
-function maxLengthString(string, maxLength) {
-  const LengthString = string.length;
-  if (maxLength < LengthString) {
+function inspectMaxLengthString(string, maxLength) {
+  const lengthString = string.length;
+  if (maxLength < lengthString) {
     return false;
   }
   return true;
 }
 
-console.log(maxLengthString('проверяемая строка', 19));
+console.log(inspectMaxLengthString('проверяемая строка', 19));
 
