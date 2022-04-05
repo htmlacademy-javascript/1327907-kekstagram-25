@@ -13,58 +13,95 @@ const inspectMaxLengthString = (string, maxLength) => {
 
 console.log(inspectMaxLengthString('проверяемая строка', 17));
 
-const QUANTITYPHOTOCARD = [1, 25];
-const QUANTITYPHOTO = [1, 25];
-const QUANTITYLIKES = [15, 200];
-const QUANTITYIDCOMMENTS = [1, 200];
-const QUANTITYAVATARPHOTOS = [1, 6];
-const QUANTITYCOMMENTS = [0, 5];
-const QUANTITYUSERNAME = [0, 5];
+const getArrRandomNumber = (min, max) => {
+  const arrRandomNumber = [];
+  for (let i = min; i <= max; i++) {
+    let a = createRandomNumder(min, max);
+    while (arrRandomNumber.includes(a)) {
+      a = createRandomNumder(min, max);
+    }
+    arrRandomNumber.push(a);
+  }
+  return arrRandomNumber;
+};
 
+
+const QuantityLikes = {min: 15, max: 200};
+const QuantityIdComments = {min: 1, max: 100};
+const QuantityAvatarPhotos = {min: 1, max: 6};
+const QuantityUserName = {min: 1, max: 6};
+const QuantityCommentsMessage = {min: 0, max: 5};
+const QuantityPhotoCard = 25;
+const QuantityCommentCards = {min: 1, max: 3};
 
 const COMMENSTSBASE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 const USERNAMEBASE = ['Артём', 'Фёдор', 'Семён', 'Олёна', 'Лёня', 'Пётр'];
 
-
-console.log(createRandomNumder(QUANTITYPHOTOCARD[0], QUANTITYPHOTOCARD[1]));
-
-
-// const MASSIVENUMBER = [];
-// for (let i = 0; i <= QUANTITYPHOTOCARD[1] -1; i++) {
-//   MASSIVENUMBER[i] = i + 1;
-// }
-// console.log(MASSIVENUMBER);
-
-// const getRandomNamber = () => {
-// };
+const photoCards = [];
+const idCommentsCard = getArrRandomNumber(QuantityIdComments.min, QuantityIdComments.max);
 
 
-const createPhotoCard = () => {
-  const idPhotoCard = createRandomNumder(QUANTITYPHOTOCARD[0], QUANTITYPHOTOCARD[1]);
-  const irlPhotoCard = createRandomNumder(QUANTITYPHOTO[0], QUANTITYPHOTO[1]);
-  const likeslPhotoCard = createRandomNumder(QUANTITYLIKES[0], QUANTITYLIKES[1]);
-  const idCommentsCard = createRandomNumder(QUANTITYIDCOMMENTS[0], QUANTITYIDCOMMENTS[1]);
-  const avatarPhotos = createRandomNumder(QUANTITYAVATARPHOTOS[0], QUANTITYAVATARPHOTOS[1]);
-  const CommentsMessage = COMMENSTSBASE[createRandomNumder(QUANTITYCOMMENTS[0], QUANTITYCOMMENTS[1])];
-  const UserName = USERNAMEBASE[createRandomNumder(QUANTITYUSERNAME[0], QUANTITYUSERNAME[1])];
+const createCommentsCard = (idComment) => {
+  const avatarPhotos = createRandomNumder(QuantityAvatarPhotos.min, QuantityAvatarPhotos.max);
+  const CommentsMessage = COMMENSTSBASE[createRandomNumder(QuantityCommentsMessage.min, QuantityCommentsMessage.max)];
+  const UserName = USERNAMEBASE[createRandomNumder(QuantityUserName.min, QuantityUserName.max)];
+  const commentsCard = {
+    id: idComment,
+    avatar: 'img/avatar-' + avatarPhotos + '.svg',
+    message: CommentsMessage,
+    name: UserName,
+  };
 
+  return commentsCard;
+};
+
+
+const commentsCards = [];
+
+const createRandomCommentsCard = () => {
+
+  for (let i = 0; i <= idCommentsCard.length - 1; i++) {
+    commentsCards[i] =  createCommentsCard();
+    commentsCards[i].id = idCommentsCard[i];
+  }
+
+  return commentsCards;
+};
+
+const randomCommentsCard = createRandomCommentsCard();
+
+const createQuantityCommentCards = () => {
+
+  const arrQuantityCommentCards = randomCommentsCard.splice(0, createRandomNumder(QuantityCommentCards.min, QuantityCommentCards.max));
+
+  return arrQuantityCommentCards;
+};
+
+
+const createPhotoCard = (id, urlPhotoCard) => {
+
+  const likeslPhotoCard = createRandomNumder(QuantityLikes.min, QuantityLikes.max);
 
   return {
-    id: idPhotoCard,
-    url: 'photos/' + irlPhotoCard + '.jpg',
+    id,
+    url: 'photos/' + urlPhotoCard + '.jpg',
     description: 'Фото Кекса',
     likes: likeslPhotoCard,
-    comments: {
-      id: idCommentsCard,
-      avatar: 'img/avatar-' + avatarPhotos + '.svg',
-      message: CommentsMessage,
-      name: UserName,
-
-    }
+    comments: createQuantityCommentCards()
   };
 };
 
+
+const getPhotoCards = () => {
+  for (let i = 0; i <= QuantityPhotoCard - 1; i++) {
+
+    photoCards[i] = createPhotoCard(i + 1, i + 1);
+
+  }
+  return photoCards;
+};
+
 console.log(
-  createPhotoCard()
+  getPhotoCards(),
 );
 
