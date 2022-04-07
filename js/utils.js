@@ -1,6 +1,6 @@
 const createRandomNumder = (min, max) => {
   if (max <= min || min < 0) {
-    return console.log('Не верный диапазон значений');
+    return;
   }
 
   const number = min + Math.random() * (max + 1 - min);
@@ -8,7 +8,8 @@ const createRandomNumder = (min, max) => {
 };
 
 const inspectMaxLengthString = (string, maxLength) => {
-  return maxLength >= string.length;
+  const stringInspect = maxLength >= string.length;
+  return stringInspect;
 };
 
 

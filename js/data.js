@@ -8,8 +8,8 @@ const QuantityCommentsMessage = {min: 0, max: 5};
 const QuantityPhotoCard = 25;
 const QuantityCommentCards = {min: 1, max: 3};
 
-const COMMENSTSBASE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
-const USERNAMEBASE = ['Артём', 'Фёдор', 'Семён', 'Олёна', 'Лёня', 'Пётр'];
+const COMMENSTS_BASE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
+const USERNAME_BASE = ['Артём', 'Фёдор', 'Семён', 'Олёна', 'Лёня', 'Пётр'];
 
 const photoCards = [];
 const idCommentsCard = getArrRandomNumber(QuantityIdComments.min, QuantityIdComments.max);
@@ -17,11 +17,11 @@ const idCommentsCard = getArrRandomNumber(QuantityIdComments.min, QuantityIdComm
 
 const createCommentsCard = (idComment) => {
   const avatarPhotos = createRandomNumder(QuantityAvatarPhotos.min, QuantityAvatarPhotos.max);
-  const CommentsMessage = COMMENSTSBASE[createRandomNumder(QuantityCommentsMessage.min, QuantityCommentsMessage.max)];
-  const UserName = USERNAMEBASE[createRandomNumder(QuantityUserName.min, QuantityUserName.max)];
+  const CommentsMessage = COMMENSTS_BASE[createRandomNumder(QuantityCommentsMessage.min, QuantityCommentsMessage.max)];
+  const UserName = USERNAME_BASE[createRandomNumder(QuantityUserName.min, QuantityUserName.max)];
   const commentsCard = {
     id: idComment,
-    avatar: 'img/avatar-' + avatarPhotos + '.svg',
+    avatar: `img/avatar-${avatarPhotos}.svg`,
     message: CommentsMessage,
     name: UserName,
   };
@@ -58,7 +58,7 @@ const createPhotoCard = (id, urlPhotoCard) => {
 
   return {
     id,
-    url: 'photos/' + urlPhotoCard + '.jpg',
+    url: `photos/${urlPhotoCard}.jpg`,
     description: 'Фото Кекса',
     likes: likeslPhotoCard,
     comments: createQuantityCommentCards()
