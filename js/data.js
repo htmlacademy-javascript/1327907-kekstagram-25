@@ -17,13 +17,13 @@ const idCommentsCard = getArrRandomNumber(QuantityIdComments.min, QuantityIdComm
 
 const createCommentsCard = (idComment) => {
   const avatarPhotos = createRandomNumder(QuantityAvatarPhotos.min, QuantityAvatarPhotos.max);
-  const CommentsMessage = COMMENSTS_BASE[createRandomNumder(QuantityCommentsMessage.min, QuantityCommentsMessage.max)];
-  const UserName = USERNAME_BASE[createRandomNumder(QuantityUserName.min, QuantityUserName.max)];
+  const commentsMessage = COMMENSTS_BASE[createRandomNumder(QuantityCommentsMessage.min, QuantityCommentsMessage.max)];
+  const userName = USERNAME_BASE[createRandomNumder(QuantityUserName.min, QuantityUserName.max)];
   const commentsCard = {
     id: idComment,
     avatar: `img/avatar-${avatarPhotos}.svg`,
-    message: CommentsMessage,
-    name: UserName,
+    message: commentsMessage,
+    name: userName,
   };
 
   return commentsCard;
